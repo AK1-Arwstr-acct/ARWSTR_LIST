@@ -81,12 +81,19 @@ const setFormData = (data : FormData) => {
 
 const OtpConfirm = async (verify_token: string) => {
   try {
+    const budget = formData.value?.selectedBudget?.value;
+    if(!budget) {
+      return;
+    }
+    const [min, max] = budget.split('-');
     let payload = {
       name: formData.value?.userName,
       email: formData.value?.email,
       msisdn: formData.value?.phoneNumber,
       current_class_grade_id: formData.value?.selectedGrade?.value,
       verify_token: verify_token,
+      annual_min_budget: min,
+      annual_max_budget: max,
       destination_country_ids: [Number(formData.value?.selectedCountry?.value)]
     };
     await api.post("/v1/sign-up/enrollment", payload);
