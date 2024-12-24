@@ -160,11 +160,13 @@
   </div>
 </template>
 <script setup lang="ts">
+import axios from "axios";
 import type { Country, FormData } from "~/types/home";
 
 const emits = defineEmits(["setForm", "setSelectedOption", "setPhoneNumber"]);
 
 const { api } = useApi();
+const { showToast } = useToast();
 
 const height = ref<number>(0);
 const isDropdownOpen = ref<boolean>(false);
@@ -259,7 +261,6 @@ const onSubmit = async () => {
     }
     emits("setPhoneNumber", phoneNumber.value);
     emits("setForm", answers.value);
-
     const response = await api.post(`/v2/send_otp`, {
       msisdn: `${selectedOption.value?.phone_code ?? ""}${
         phoneNumber.value ?? ""
@@ -267,7 +268,11 @@ const onSubmit = async () => {
       id: selectedOption.value?.id,
       sender: "https://waitlist.arrowster.com"
     });
-  } catch (error) {}
+  } catch (error) {
+    if(axios.isAxiosError(error)) {
+      showToast(error.response?.data.message);
+    }
+  }
 };
 
 const getCountries = async () => {

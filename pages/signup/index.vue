@@ -102,11 +102,12 @@ const OtpConfirm = async (verify_token: string) => {
     navigateTo("/onboarded");
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      // const errorMessage = error.response?.data.errors.msisdn[0] ?? "Something went wrong";
-      showToast("The email or phone number is already registered", {
+      const errorMessage = (error.response?.data.errors.msisdn[0] || error.response?.data.errors.email[0]) ? "The email or phone number is already registered" : "Something went wrong";
+      showToast(errorMessage, {
         type: "warning",
       });
     }
+    steps.value = "register";
   }
 };
 const windowHeight = computed(() => {
