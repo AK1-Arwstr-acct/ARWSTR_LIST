@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* No Scrollbar */
+.no-scrollbar::-webkit-scrollbar {
+	display: none;
+}
+
+/* remove inner shadows of input */
+.remove-shadow input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px transparent inset;
+    box-shadow: 0 0 0 1000px transparent inset;
+    font-size: 16px;
+    color: white;
+    -webkit-text-fill-color: white;
+    transition: background-color 5000s ease-in-out 0s;
+    caret-color: white;
+  }
