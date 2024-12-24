@@ -10,13 +10,14 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@nuxt/image": "1.8.1",
+    "axios": "^1.7.5",
+    "click-outside-vue3": "^4.0.1",
     "nuxt": "^3.14.1592",
     "vue": "latest",
     "vue-router": "latest",
-    "axios": "^1.7.5",
     "vue3-otp-input": "^0.5.21",
-    "click-outside-vue3": "^4.0.1",
-    "@nuxt/image": "1.8.1"
+    "vue3-toastify": "^0.2.8"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.20",

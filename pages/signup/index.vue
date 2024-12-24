@@ -53,9 +53,11 @@
   </div>
 </template>
 <script setup lang="ts">
+import axios from "axios";
 import type { Country, FormData } from "~/types/home";
 
 const { api } = useApi();
+const { showToast } = useToast();
 
 const steps = ref<"register" | "otp_varification">("register");
 const formData = ref<FormData>();
@@ -70,22 +72,21 @@ const setPhoneNumber = (Number: string) => {
   phoneNumber.value = Number;
 };
 
-const setFormData = (data : FormData) => {
+const setFormData = (data: FormData) => {
   formData.value = {
     ...data,
     phoneNumber: `${selectedOption.value?.phone_code}${phoneNumber.value}`,
   };
   steps.value = "otp_varification";
-  console.log(formData.value);
 };
 
 const OtpConfirm = async (verify_token: string) => {
   try {
     const budget = formData.value?.selectedBudget?.value;
-    if(!budget) {
+    if (!budget) {
       return;
     }
-    const [min, max] = budget.split('-');
+    const [min, max] = budget.split("-");
     let payload = {
       name: formData.value?.userName,
       email: formData.value?.email,
@@ -94,13 +95,17 @@ const OtpConfirm = async (verify_token: string) => {
       verify_token: verify_token,
       annual_min_budget: min,
       annual_max_budget: max,
-      destination_country_ids: [Number(formData.value?.selectedCountry?.value)]
+      destination_country_ids: [Number(formData.value?.selectedCountry?.value)],
     };
     await api.post("/v1/sign-up/enrollment", payload);
 
     navigateTo("/onboarded");
   } catch (error) {
-    console.error(error);
+    if (axios.isAxiosError(error)) {
+      const errorMessage =
+        error.response?.data.errors.msisdn[0] ?? "Something went wrong";
+      showToast(errorMessage);
+    }
   }
 };
 const windowHeight = computed(() => {

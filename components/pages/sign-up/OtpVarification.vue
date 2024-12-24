@@ -112,24 +112,19 @@ const onSubmit = async () => {
     const response = await api.post(`/v2/validate_otp`, {
       msisdn: `${props.selectedOption?.phone_code ?? ""}${
         props.phoneNumber ?? ""
-        }`,
+      }`,
       otp_code: otp.value,
     });
-    
-     const token = response.data.data.verify_token;
-      
-      
-      emits('OtpConfirm', token)
-    // We need to add this timeout so user don't feel that loader is stopped but I haven't yet navigated to homepage
-    // setTimeout(() => {
-    //   isSubmitting.value = false;
-    // }, 700);
+    const token = response.data.data.verify_token;
+
+    emits("OtpConfirm", token);
   } catch (error) {
+    isValid.value = false;
+    console.error(error);
+  } finally {
     isSubmitting.value = false;
     inputKey.value += 1;
     otp.value = "";
-    isValid.value = false;
-    console.error(error);
   }
 };
 </script>

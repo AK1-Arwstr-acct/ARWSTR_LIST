@@ -289,7 +289,6 @@ const getClassGrades = async () => {
           label: item.class_name,
         };
       });
-    console.log(response);
   } catch (error) {
     console.error(error);
   }
