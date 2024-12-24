@@ -8,9 +8,8 @@ export const useToast = () => {
     type: 'error',
   };
 
-  const showToast = (message: string, error?: AxiosError, options = defaultOptions) => {
-    const fullMessage = error ? `${message}: ${(error as AxiosError).message}` : message;
-    toast(fullMessage, options);
+  const showToast = (message: string, options = defaultOptions) => {
+    toast(message, options);
   };
 
   return {
