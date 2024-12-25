@@ -102,7 +102,16 @@ const OtpConfirm = async (verify_token: string) => {
     navigateTo("/onboarded");
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      const errorMessage = (error.response?.data.errors.msisdn[0] || error.response?.data.errors.email[0]) ? "The email or phone number is already registered" : "Something went wrong";
+      const phoneError = error.response?.data.errors.msisdn?.[0];
+      const emailError = error.response?.data.errors.email?.[0];
+      let errorMessage = "Something went wrong";
+      if (phoneError && emailError) {
+        errorMessage = "The email and phone number are already registered";
+      } else if (phoneError) {
+        errorMessage = "The phone number is already registered";;
+      } else if (emailError) {
+        errorMessage = "The email is already registered";;
+      }
       showToast(errorMessage, {
         type: "warning",
       });
