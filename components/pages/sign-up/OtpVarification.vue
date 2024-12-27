@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col gap-8 mt-12">
+  <div class="flex flex-col gap-8 mt-20">
     <div>
       <div class="mb-8 md:mb-6">
         <p class="text-[#AEAEAE] mb-3">
@@ -58,6 +58,17 @@
         <BaseSpinner v-if="isSubmitting" color="#FFFFFF" />
         Continue
       </button>
+      <div class="text-sm text-[#B0B4BA] mt-6 font-semibold">
+        <button
+          v-if="timeLeft === 20"
+          @click="timer"
+          type="button"
+          class="text-[#8380FF] underline"
+        >
+          Resend OTP code
+        </button>
+        <p v-else>Resend OTP code ({{ timeLeft }})</p>
+      </div>
     </div>
   </div>
 </template>
@@ -86,6 +97,7 @@ const otp = ref<string>("");
 const isValid = ref<boolean>(true);
 const isSubmitting = ref<boolean>(false);
 const inputKey = ref<number>(0);
+const timeLeft = ref<number>(20);
 
 const inputclasses = computed(() => {
   return [
@@ -103,6 +115,28 @@ const blockNonNumeric = (event: KeyboardEvent) => {
   const key = event.key;
   if (!/^\d$/.test(key)) {
     event.preventDefault();
+  }
+};
+
+const timer = async () => {
+  try {
+    timeLeft.value = timeLeft.value - 1;
+    const timerInterval = setInterval(() => {
+      timeLeft.value = timeLeft.value - 1;
+      if (timeLeft.value === 0) {
+        clearInterval(timerInterval);
+        timeLeft.value = 20;
+      }
+    }, 1000);
+    await api.post(`/v2/send_otp`, {
+      msisdn: `${props.selectedOption?.phone_code ?? ""}${
+        props.phoneNumber ?? ""
+      }`,
+      id: props.selectedOption?.id,
+      sender: "https://waitlist.arrowster.com"
+    });
+  } catch (error) {
+    console.error(error);
   }
 };
 

@@ -73,7 +73,7 @@ const timer = ref<boolean>(false);
 onMounted(() => {
   setTimeout(() => {
     timer.value = true;
-  }, 2000);
+  }, 5000);
 });
 </script>
 <style scoped>
@@ -157,6 +157,6 @@ onMounted(() => {
 }
 
 .delay-2 {
-  animation-delay: 3s;
+  animation-delay: 5.6s;
 }
 </style>
