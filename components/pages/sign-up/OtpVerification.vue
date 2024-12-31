@@ -7,8 +7,8 @@
           <span
             class="text-[#9CA2FF] underline cursor-pointer"
             @click="emits('goBack')"
-            >Go back</span
-          >
+            >Go back</span 
+          >{{ otp }}
         </p>
         <h1
           class="text-6xl lg:text-[72px] md:leading-[80px] font-semibold mb-3 text-white"
@@ -50,10 +50,12 @@
     </div>
     <div>
       <button
+        ref="submitButton"
+        @keydown.enter="onSubmit"
         @click="onSubmit"
         type="submit"
         :disabled="otp.length !== 4 || isSubmitting"
-        class="cursor-pointer disabled:opacity-70 w-full text-xl bg-[#8380FF] text-[#F3F3F3] rounded-lg font-semibold py-3 flex gap-2 justify-center items-center transition-all ease-in-out duration-200"
+        class="cursor-pointer disabled:opacity-70 w-full text-xl bg-[#8380FF] text-[#F3F3F3] rounded-lg focus:outline-none font-semibold py-3 flex gap-2 justify-center items-center transition-all ease-in-out duration-200"
       >
         <BaseSpinner v-if="isSubmitting" color="#FFFFFF" />
         Continue
@@ -98,6 +100,7 @@ const isValid = ref<boolean>(true);
 const isSubmitting = ref<boolean>(false);
 const inputKey = ref<number>(0);
 const timeLeft = ref<number>(20);
+const submitButton = ref<HTMLElement | null>(null);
 
 const inputclasses = computed(() => {
   return [
@@ -107,6 +110,12 @@ const inputclasses = computed(() => {
       : "border-[#F76369] placeholder:text-[#F76369] text-[#F76369]",
   ].join(" ");
 });
+
+// const submitFocus = computed(()=>{
+//   if (otp.value.length === 4) {
+//     // submitButton.value?.focus();
+//   }
+// })
 
 const handleOnChange = () => {
   isValid.value = true;
@@ -133,7 +142,7 @@ const timer = async () => {
         props.phoneNumber ?? ""
       }`,
       id: props.selectedOption?.id,
-      sender: "https://waitlist.arrowster.com"
+      sender: "https://waitlist.arrowster.com",
     });
   } catch (error) {
     console.error(error);
@@ -161,4 +170,14 @@ const onSubmit = async () => {
     otp.value = "";
   }
 };
+
+watch(
+  () => otp.value,
+  (newValue) => {
+    if (newValue.length === 4) {
+      submitButton.value?.focus();
+    }
+  },
+  { flush: 'post' }
+);
 </script>

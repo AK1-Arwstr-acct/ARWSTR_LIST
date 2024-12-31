@@ -1,6 +1,6 @@
 <template>
   <div
-    class="h-screen w-screen overflow-x-hidden no-scrollbar"
+    class="h-[100dvh] w-[100dvw] overflow-x-hidden no-scrollbar"
   >
     <div
       class="size-full bg-[#1A1A1A] overflow-hidden text-center relative"
@@ -10,12 +10,12 @@
       <!-- part one -->
       <div
         :class="{ 'slide-up-fade': timer }"
-        class="absolute inset-0 size-full flex flex-col justify-center items-center gap-10 slide-up transform translate-y-1/4 opacity-0 overflow-auto no-scrollbar py-10"
+        class="absolute inset-0 size-full flex flex-col justify-center items-center gap-10 slide-up transform translate-y-1/4 opacity-0 overflow-auto no-scrollbar"
       >
         <div class="flex flex-col justify-center items-center h-max">
           <IconArrowster />
           <h1
-            class="text-[#F3F3F3] font-semibold text-5xl px-10"
+            class="text-[#F3F3F3] font-semibold text-3xl md:text-5xl px-5"
           >
             Make study abroad accessible to all. Here's the only AI Roadmap you need to go study abroad.
           </h1>
@@ -23,21 +23,21 @@
       </div>
       <!-- part two -->
       <div
-        class="size-full slide-up delay-2 transform translate-y-1/4 opacity-0 flex items-center overflow-auto no-scrollbar py-10"
+        class="size-full slide-up delay-2 transform translate-y-1/4 opacity-0 flex items-center overflow-auto no-scrollbar"
       >
         <div
-          class="flex flex-col justify-center items-center gap-6 lg:gap-8 h-max px-10 mx-auto text-[#F3F3F3]"
+          class="flex flex-col justify-center items-center gap-6 lg:gap-8 h-max px-5 mx-auto text-[#F3F3F3]"
         >
           <div class="flex flex-col items-center">
             <IconArrowster />
             <h1
-              class="font-semibold text-6xl lg:text-[72px] md:leading-[80px]"
+              class="font-semibold text-5xl lg:text-[72px] md:leading-[80px]"
             >
               <span class="text-[#8380FF]">You’re on the</span> Waitlist
             </h1>
           </div>
           <p
-            class="text-2xl md:text-[32px] lg:text-[40px] leading-[28px] md:leading-[38px] lg:leading-[48px]"
+            class="text-xl md:text-[32px] lg:text-[40px] leading-[28px] md:leading-[38px] lg:leading-[48px]"
           >
             We'll contact you immediately for this exclusive trial!
           </p>

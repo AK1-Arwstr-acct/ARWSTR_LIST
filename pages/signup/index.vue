@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen w-screen overflow-x-hidden no-scrollbar">
+  <div class="h-[100dvh] w-[100dvw] overflow-x-hidden no-scrollbar">
     <div class="size-full flex overflow-hidden min-h-fit">
       <!-- Left Side -->
       <div
@@ -16,7 +16,7 @@
             @setPhoneNumber="(value) => setPhoneNumber(value)"
             @setSelectedOption="(value) => setSelectedOption(value)"
           />
-          <OtpVarification
+          <OtpVerification
             v-else-if="steps === 'otp_varification'"
             :phoneNumber="phoneNumber"
             :selectedOption="selectedOption"

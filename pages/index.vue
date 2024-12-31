@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen w-screen overflow-x-hidden no-scrollbar">
+  <div class="h-[100dvh] w-screen overflow-x-hidden no-scrollbar">
     <div
       class="size-full min-h-fit bg-black overflow-hidden isolate relative flex items-center overflow-x-hidden"
     >
@@ -11,12 +11,14 @@
               autoplay
               loop
               muted
-              class="object-cover w-[300px] h-[230px] sm:h-auto sm:w-auto sm:aspect-video rounded-xl shadow-[0px_12px_120px_0px_rgba(128,128,236,0.20)]"
-              src="../public/video/intro.mov"
+              playsinline
+              class="object-cover w-[400px] h-[230px] sm:h-auto sm:w-auto sm:aspect-video rounded-xl shadow-[0px_12px_120px_0px_rgba(128,128,236,0.20)]"
+              src="../public/video/intro.mp4"
+              poster="../public/images/waitlist flow 1.png"
             />
           </div>
           <h1
-            class="w-[60%] text-[#F3F3F3] font-semibold text-2xl sm:text-3xl lg:text-[40px] text-center"
+            class="md:w-[60%] text-[#F3F3F3] font-semibold text-2xl sm:text-3xl lg:text-[40px] text-center"
           >
             Join the exclusive waitlist to try the AI we cooked for your study
             abroad dream!
@@ -32,28 +34,6 @@
     </div>
   </div>
 </template>
-<script setup lang="ts">
-const height = ref<number>(0);
-
-const windowHeight = computed(() => {
-  return height.value > 830;
-});
-
-const windowSize = () => {
-  if (typeof window !== "undefined") {
-    height.value = window.innerHeight;
-  }
-};
-
-onMounted(() => {
-  windowSize();
-  window.addEventListener("resize", windowSize);
-});
-
-onBeforeUnmount(() => {
-  window.removeEventListener("resize", windowSize);
-});
-</script>
 <style scoped>
 .bgRadial {
   background: radial-gradient(
