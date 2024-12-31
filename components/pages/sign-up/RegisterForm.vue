@@ -2,7 +2,7 @@
   <div class="flex flex-col gap-6 h-full" :class="{'mt-6' : windowHeight}" >
     <div>
       <h1
-        class="font-semibold mb-3 text-[#F3F3F3]"
+        class="font-semibold mb-4 text-[#F3F3F3]"
         :class="[windowHeight ? 'text-5xl lg:text-6xl' : 'text-5xl']"
       >
         Getting to<br />
@@ -12,7 +12,7 @@
         A few quick details to personalize your experience
       </p>
     </div>
-    <div class="remove-shadow flex flex-wrap gap-4">
+    <div class="remove-shadow flex flex-wrap gap-4 md:gap-6">
       <div class="w-full">
         <label class="uppercase font-medium text-[#E2E6FF]">Your name</label>
         <input
@@ -24,7 +24,7 @@
           class="mt-1 bg-transparent focus:outline-none focus:ring-0 rounded-none border-b border-[#E1E1E1] py-2 w-full outline-none focus:border-[#8380FF] transition-all ease-in-out duration-150 appearance-none text-white"
         />
       </div>
-      <div class="w-[calc(50%-8px)]">
+      <div class="w-[calc(50%-12px)]">
         <label class="uppercase font-medium text-[#E2E6FF]">Email</label>
         <input
           name="email"
@@ -36,7 +36,7 @@
         />
       </div>
       <!--  -->
-      <div class="relative w-[calc(50%-8px)]">
+      <div class="relative w-[calc(50%-12px)]">
         <label class="uppercase font-semibold text-[#E2E6FF] mb-1.5">
           Phone number
         </label>
@@ -128,14 +128,14 @@
         :options="classGrades"
         v-model="answers.selectedGrade"
         placeholder="Select your grade"
-        class="w-[calc(50%-8px)]"
+        class="w-[calc(50%-12px)]"
       />
       <BaseSelectRadio
         label="ANNUAL BUDGET"
         :options="budget"
         v-model="answers.selectedBudget"
         placeholder="Select your budget"
-        class="w-[calc(50%-8px)]"
+        class="w-[calc(50%-12px)]"
       />
       <BaseSelectRadio
         label="COUNTRY PREFERENCE"

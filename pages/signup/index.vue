@@ -1,53 +1,33 @@
 <template>
-  <div
-    class="relative h-screen flex justify-center py-8 px-1 md:px-5 lg:px-28 overflow-y-auto no-scrollbar"
-    :class="{ 'items-center': windowHeight }"
-  >
-    <div class="fixed inset-0 -z-20">
-      <NuxtImg
-        src="/images/shared/background-image.png"
-        class="size-full object-cover"
-        alt="Background Image"
-      />
-    </div>
-    <div
-      class="bgGradient size-auto min-h-fit h-full max-h-[800px] w-[1200px] p-0.5 rounded-2xl"
-    >
+  <div class="h-screen w-screen overflow-x-hidden no-scrollbar">
+    <div class="size-full flex overflow-hidden min-h-fit">
+      <!-- Left Side -->
       <div
-        class="bg-[#1A1A1A] size-full flex rounded-2xl overflow-hidden min-h-fit"
+        class="w-full h-full min-h-fit lg:w-1/2 bg-radial p-6 md:p-12 flex flex-col gap-6"
       >
-        <!-- Left Side -->
-        <div
-          class="w-full h-fit lg:w-1/2 bg-[#1A1A1A] rounded-l-2xl rounded-r-2xl lg:rounded-r-none overflow-hidden p-6 flex flex-col gap-6"
-        >
-          <div>
-            <NuxtImg
-              class="w-[164px]"
-              src="/images/logo/logo.svg"
-              alt="Logo"
-            />
-          </div>
-          <div class="flex-1">
-            <!-- steps -->
-            <RegisterForm
-              v-if="steps === 'register'"
-              @setForm="(value) => setFormData(value)"
-              @setPhoneNumber="(value) => setPhoneNumber(value)"
-              @setSelectedOption="(value) => setSelectedOption(value)"
-            />
-            <OtpVarification
-              v-else-if="steps === 'otp_varification'"
-              :phoneNumber="phoneNumber"
-              :selectedOption="selectedOption"
-              @goBack="steps = 'register'"
-              @OtpConfirm="(value) => OtpConfirm(value)"
-            />
-          </div>
+        <div>
+          <NuxtImg class="w-[164px]" src="/images/logo/logo.svg" alt="Logo" />
         </div>
-        <!-- Right side  -->
-        <div class="hidden lg:block lg:w-1/2 rounded-r-2xl overflow-hidden">
-          <RightSideInformation :isFullwidth="steps === 'otp_varification'" />
+        <div class="flex-1">
+          <!-- steps -->
+          <RegisterForm
+            v-if="steps === 'register'"
+            @setForm="(value) => setFormData(value)"
+            @setPhoneNumber="(value) => setPhoneNumber(value)"
+            @setSelectedOption="(value) => setSelectedOption(value)"
+          />
+          <OtpVarification
+            v-else-if="steps === 'otp_varification'"
+            :phoneNumber="phoneNumber"
+            :selectedOption="selectedOption"
+            @goBack="steps = 'register'"
+            @OtpConfirm="(value) => OtpConfirm(value)"
+          />
         </div>
+      </div>
+      <!-- Right side  -->
+      <div class="hidden lg:block lg:w-1/2">
+        <RightSideInformation />
       </div>
     </div>
   </div>
@@ -108,9 +88,9 @@ const OtpConfirm = async (verify_token: string) => {
       if (phoneError && emailError) {
         errorMessage = "The email and phone number are already registered";
       } else if (phoneError) {
-        errorMessage = "The phone number is already registered";;
+        errorMessage = "The phone number is already registered";
       } else if (emailError) {
-        errorMessage = "The email is already registered";;
+        errorMessage = "The email is already registered";
       }
       showToast(errorMessage, {
         type: "warning",
@@ -138,18 +118,13 @@ onBeforeUnmount(() => {
   window.removeEventListener("resize", windowSize);
 });
 </script>
-
 <style scoped>
-.bgGradient {
+.bg-radial {
   background: radial-gradient(
-      68.44% 78.44% at 10% 141.23%,
-      #ffffff 17.18%,
-      rgba(57, 54, 178, 0) 100%
+      122.03% 137.69% at 74.31% 20.12%,
+      rgba(131, 128, 255, 0) 53.55%,
+      #8380ff 100%
     ),
-    radial-gradient(
-      97.99% 85.4% at 10% -15.14%,
-      rgba(255, 255, 255) 10.18%,
-      rgba(26, 26, 26, 0.3) 76.45%
-    );
+    var(--background-page-neutral, #111113);
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col gap-8 mt-20">
     <div>
-      <div class="mb-8 md:mb-6">
+      <div class="mb-6 md:mb-8">
         <p class="text-[#AEAEAE] mb-3">
           Wrong phone number?
           <span

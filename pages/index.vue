@@ -1,25 +1,12 @@
 <template>
-  <div
-    class="relative h-screen flex justify-center py-8 px-1 md:px-5 lg:px-28 overflow-y-auto no-scrollbar"
-    :class="{'items-center': windowHeight}"
-  >
-    <div class="fixed inset-0 -z-20">
-      <NuxtImg
-        src="/images/shared/background-image.png"
-        class="size-full object-cover"
-        alt="Background Image"
-      />
-    </div>
+  <div class="h-screen w-screen overflow-x-hidden no-scrollbar">
     <div
-      class="bgGradient size-auto min-h-fit h-full max-h-[750px] w-[1200px] p-0.5 rounded-2xl"
+      class="size-full min-h-fit bg-black overflow-hidden isolate relative flex items-center overflow-x-hidden"
     >
-    <div class="size-full min-h-fit bg-black rounded-2xl overflow-hidden isolate relative">
       <div class="absolute inset-0 -z-10 bgRadial" />
-      <div
-        class="w-full h-fit min-h-fit  text-[#F3F3F3]"
-      >
+      <div class="w-full h-fit min-h-fit text-[#F3F3F3]">
         <div class="p-6 size-full flex flex-col gap-6 items-center">
-          <div class="md:max-w-[700px]">
+          <div class="md:max-w-[856px]">
             <video
               autoplay
               loop
@@ -29,16 +16,19 @@
             />
           </div>
           <h1
-            class="w-[80%] text-[#F3F3F3] font-semibold text-2xl sm:text-3xl lg:text-[40px] text-center"
+            class="w-[60%] text-[#F3F3F3] font-semibold text-2xl sm:text-3xl lg:text-[40px] text-center"
           >
-            Join the exclusive waitlist to try the AI we cooked for your study abroad dream!
+            Join the exclusive waitlist to try the AI we cooked for your study
+            abroad dream!
           </h1>
-          <button @click="navigateTo('/signup')" class="text-[#F3F3F3] font-semibold bg-[#8380FF] rounded-lg p-3">
+          <button
+            @click="navigateTo('/signup')"
+            class="text-[#F3F3F3] font-semibold bg-[#8380FF] rounded-lg p-3"
+          >
             Sign up for waitlist
           </button>
         </div>
       </div>
-    </div>
     </div>
   </div>
 </template>
@@ -65,19 +55,6 @@ onBeforeUnmount(() => {
 });
 </script>
 <style scoped>
-.bgGradient {
-  background: radial-gradient(
-      68.44% 78.44% at 10% 141.23%,
-      #ffffff 17.18%,
-      rgba(57, 54, 178, 0) 100%
-    ),
-    radial-gradient(
-      97.99% 85.4% at 10% -15.14%,
-      rgba(255, 255, 255) 10.18%,
-      rgba(26, 26, 26, 0.3) 76.45%
-    );
-}
-
 .bgRadial {
   background: radial-gradient(
       88.44% 88.44% at 50% 141.23%,
