@@ -78,7 +78,12 @@ const OtpConfirm = async (verify_token: string) => {
       destination_country_ids: [Number(formData.value?.selectedCountry?.value)],
     };
     await api.post("/v1/sign-up/enrollment", payload);
-
+    if (verify_token) {
+      const AccessToken = useCookie("AccessToken", {
+        maxAge: 3600,
+      });
+      AccessToken.value = JSON.stringify(verify_token);
+    }
     navigateTo("/onboarded");
   } catch (error) {
     if (axios.isAxiosError(error)) {

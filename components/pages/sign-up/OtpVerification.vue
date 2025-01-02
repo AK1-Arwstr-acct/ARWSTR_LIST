@@ -159,12 +159,6 @@ const onSubmit = async () => {
       otp_code: otp.value,
     });
     const token = response.data.data.verify_token;
-    if (token) {
-      const AccessToken = useCookie("AccessToken", {
-        maxAge: 3600,
-      });
-      AccessToken.value = JSON.stringify(token);
-    }
     emits("OtpConfirm", token);
   } catch (error) {
     isValid.value = false;
