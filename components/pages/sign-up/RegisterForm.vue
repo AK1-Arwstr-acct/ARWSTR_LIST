@@ -76,6 +76,7 @@
               />
             </div>
             <div
+              class="text-nowrap"
               :class="[
                 phoneNumber.length > 0 ? 'text-[#ffffff]' : 'text-[#999999]',
               ]"

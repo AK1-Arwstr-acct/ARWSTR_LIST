@@ -1,10 +1,6 @@
 <template>
-  <div
-    class="h-[100dvh] w-[100dvw] overflow-x-hidden no-scrollbar"
-  >
-    <div
-      class="size-full bg-[#1A1A1A] overflow-hidden text-center relative"
-    >
+  <div class="h-[100dvh] w-[100dvw] overflow-x-hidden no-scrollbar">
+    <div class="size-full bg-[#1A1A1A] overflow-hidden text-center relative">
       <div class="backShadowsTop absolute inset-0 bgAnimateTop" />
       <div class="backShadowsBottom absolute inset-0 bgAnimateBottom" />
       <!-- part one -->
@@ -14,10 +10,9 @@
       >
         <div class="flex flex-col justify-center items-center h-max">
           <IconArrowster />
-          <h1
-            class="text-[#F3F3F3] font-semibold text-3xl md:text-5xl px-5"
-          >
-            Make study abroad accessible to all. Here's the only AI Roadmap you need to go study abroad.
+          <h1 class="text-[#F3F3F3] font-semibold text-3xl md:text-5xl px-5">
+            Make study abroad accessible to all. Here's the only AI Roadmap you
+            need to go study abroad.
           </h1>
         </div>
       </div>
@@ -30,9 +25,7 @@
         >
           <div class="flex flex-col items-center">
             <IconArrowster />
-            <h1
-              class="font-semibold text-5xl lg:text-[72px] md:leading-[80px]"
-            >
+            <h1 class="font-semibold text-5xl lg:text-[72px] md:leading-[80px]">
               <span class="text-[#8380FF]">You’re on the</span> Waitlist
             </h1>
           </div>
@@ -57,6 +50,10 @@
   </div>
 </template>
 <script setup lang="ts">
+definePageMeta({
+  middleware: "access",
+});
+
 const timer = ref<boolean>(false);
 
 onMounted(() => {

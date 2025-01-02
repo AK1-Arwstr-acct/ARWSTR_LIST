@@ -7,8 +7,8 @@
           <span
             class="text-[#9CA2FF] underline cursor-pointer"
             @click="emits('goBack')"
-            >Go back</span 
-          >{{ otp }}
+            >Go back</span
+          >
         </p>
         <h1
           class="text-6xl lg:text-[72px] md:leading-[80px] font-semibold mb-3 text-white"
@@ -159,7 +159,12 @@ const onSubmit = async () => {
       otp_code: otp.value,
     });
     const token = response.data.data.verify_token;
-
+    if (token) {
+      const AccessToken = useCookie("AccessToken", {
+        maxAge: 3600,
+      });
+      AccessToken.value = JSON.stringify(token);
+    }
     emits("OtpConfirm", token);
   } catch (error) {
     isValid.value = false;
@@ -178,6 +183,6 @@ watch(
       submitButton.value?.focus();
     }
   },
-  { flush: 'post' }
+  { flush: "post" }
 );
 </script>
