@@ -1,75 +1,77 @@
 <template>
-  <div class="flex flex-col gap-8 mt-20">
-    <div>
-      <div class="mb-6 md:mb-8">
-        <p class="text-[#AEAEAE] mb-3">
-          Wrong phone number?
-          <span
-            class="text-[#9CA2FF] underline cursor-pointer"
-            @click="emits('goBack')"
-            >Go back</span
-          >
-        </p>
-        <h1
-          class="text-6xl lg:text-[72px] md:leading-[80px] font-semibold mb-3 text-white"
-        >
-          <span class="text-[#7975FF]">OTP</span> <br />
-          Verification
-        </h1>
-        <p class="text-[#AEAEAE]">
-          We sent an OTP to your phone number<br class="lg:hidden" />
-          <span class="text-[#9CA2FF]"
-            >({{ selectedOption?.phone_code }}) {{ phoneNumber }}</span
-          >
-        </p>
-      </div>
+  <div class="flex flex-col h-full justify-center">
+    <div class="flex flex-col gap-8 mt-20">
       <div>
-        <div class="relative">
-          <OtpInput
-            :key="inputKey"
-            class="flex gap-3 md:gap-2 w-full"
-            :input-classes="inputclasses"
-            inputType="number"
-            :num-inputs="4"
-            inputmode="numeric"
-            v-model:value="otp"
-            :should-auto-focus="true"
-            :should-focus-order="true"
-            :placeholder="['-', '-', '-', '-']"
-            @on-change="handleOnChange"
-            @keydown="blockNonNumeric"
-          />
-          <p
-            v-if="!isValid"
-            class="text-[#F76369] mt-1 font-semibold absolute left-1/2 transform -translate-x-1/2"
+        <div class="mb-6 md:mb-8">
+          <p class="text-[#AEAEAE] mb-3">
+            Wrong phone number?
+            <span
+              class="text-[#9CA2FF] underline cursor-pointer"
+              @click="emits('goBack')"
+              >Go back</span
+            >
+          </p>
+          <h1
+            class="text-6xl lg:text-[72px] md:leading-[80px] font-semibold mb-3 text-white"
           >
-            OTP invalid
+            <span class="text-[#7975FF]">OTP</span> <br />
+            Verification
+          </h1>
+          <p class="text-[#AEAEAE]">
+            We sent an OTP to your phone number<br class="lg:hidden" />
+            <span class="text-[#9CA2FF]"
+              >({{ selectedOption?.phone_code }}) {{ phoneNumber }}</span
+            >
           </p>
         </div>
+        <div>
+          <div class="relative">
+            <OtpInput
+              :key="inputKey"
+              class="flex gap-3 md:gap-2 w-full"
+              :input-classes="inputclasses"
+              inputType="number"
+              :num-inputs="4"
+              inputmode="numeric"
+              v-model:value="otp"
+              :should-auto-focus="true"
+              :should-focus-order="true"
+              :placeholder="['-', '-', '-', '-']"
+              @on-change="handleOnChange"
+              @keydown="blockNonNumeric"
+            />
+            <p
+              v-if="!isValid"
+              class="text-[#F76369] mt-1 font-semibold absolute left-1/2 transform -translate-x-1/2"
+            >
+              OTP invalid
+            </p>
+          </div>
+        </div>
       </div>
-    </div>
-    <div>
-      <button
-        ref="submitButton"
-        @keydown.enter="onSubmit"
-        @click="onSubmit"
-        type="submit"
-        :disabled="otp.length !== 4 || isSubmitting"
-        class="cursor-pointer disabled:opacity-70 w-full text-xl bg-[#8380FF] text-[#F3F3F3] rounded-lg focus:outline-none font-semibold py-3 flex gap-2 justify-center items-center transition-all ease-in-out duration-200"
-      >
-        <BaseSpinner v-if="isSubmitting" color="#FFFFFF" />
-        Continue
-      </button>
-      <div class="text-sm text-[#B0B4BA] mt-6 font-semibold">
+      <div>
         <button
-          v-if="timeLeft === 20"
-          @click="timer"
-          type="button"
-          class="text-[#8380FF] underline"
+          ref="submitButton"
+          @keydown.enter="onSubmit"
+          @click="onSubmit"
+          type="submit"
+          :disabled="otp.length !== 4 || isSubmitting"
+          class="cursor-pointer disabled:opacity-70 w-full text-xl bg-[#8380FF] text-[#F3F3F3] rounded-lg focus:outline-none font-semibold py-3 flex gap-2 justify-center items-center transition-all ease-in-out duration-200"
         >
-          Resend OTP code
+          <BaseSpinner v-if="isSubmitting" color="#FFFFFF" />
+          Continue
         </button>
-        <p v-else>Resend OTP code ({{ timeLeft }})</p>
+        <div class="text-sm text-[#B0B4BA] mt-6 font-semibold">
+          <button
+            v-if="timeLeft === 20"
+            @click="timer"
+            type="button"
+            class="text-[#8380FF] underline"
+          >
+            Resend OTP code
+          </button>
+          <p v-else>Resend OTP code ({{ timeLeft }})</p>
+        </div>
       </div>
     </div>
   </div>

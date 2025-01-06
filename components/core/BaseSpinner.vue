@@ -14,7 +14,7 @@
 defineProps({
   color: {
     type: String,
-    default: "#000",
+    default: "#f3f3f3",
   },
   width: {
     type: String,

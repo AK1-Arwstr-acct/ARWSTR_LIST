@@ -1,5 +1,5 @@
 <template>
-  <div class="h-[100dvh] w-[100dvw] overflow-x-hidden no-scrollbar">
+  <div class="h-[100dvh] w-full overflow-x-hidden no-scrollbar">
     <div class="size-full bg-[#1A1A1A] overflow-hidden text-center relative">
       <div class="backShadowsTop absolute inset-0 bgAnimateTop" />
       <div class="backShadowsBottom absolute inset-0 bgAnimateBottom" />

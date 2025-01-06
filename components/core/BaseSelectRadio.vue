@@ -2,14 +2,17 @@
   <div class="relative">
     <p v-if="label" class="font-medium mb-1.5 text-[#E2E6FF]">{{ label }}</p>
     <div
-      @click="isDropdownOpen = !isDropdownOpen"
-      @touchstart.prevent="isDropdownOpen = !isDropdownOpen"
+      @touchstart="handleTouchStart"
+      @touchmove="handleTouchMove"
+      @touchend="handleTouchEnd"
+      @click="toggleDropdown"
       class="bg-transparent h-12 border-b-[1.5px] border-[#e0e0e0] py-2 w-full transition-colors duration-150 ease-in-out flex justify-between items-center cursor-pointer relative"
       :class="{
         '!bg-[#f8f8f8] pointer-events-none': disabled,
         'shadow-dropdown-dropShadow': isDropdownOpen,
         '!border-[#9CA2FF]': isDropdownOpen,
-        '!border-[#EF4646]' : hasError && !selectedOption?.value && !isDropdownOpen
+        '!border-[#EF4646]':
+          hasError && !selectedOption?.value && !isDropdownOpen,
       }"
     >
       <div v-if="!selectedOption?.value" class="flex-1">
@@ -94,7 +97,7 @@
 </template>
 
 <script setup lang="ts">
-import type { OptionAttributes } from '~/types/home';
+import type { OptionAttributes } from "~/types/home";
 
 const props = defineProps({
   placeholder: {
@@ -107,7 +110,7 @@ const props = defineProps({
   },
   modelValue: {
     type: Object as PropType<OptionAttributes | null>,
-    default: null
+    default: null,
   },
   label: {
     type: String,
@@ -145,6 +148,33 @@ const emits = defineEmits<{
 
 const isDropdownOpen = ref<boolean>(false);
 const selectedOption = ref<OptionAttributes | null>(props.modelValue);
+
+// Variables to track touch gestures
+const touchStartY = ref(0);
+const touchEndY = ref(0);
+const isTouch = ref(false); // Tracks whether the event is from touch
+
+const handleTouchStart = (event: TouchEvent) => {
+  event.stopPropagation();
+  isTouch.value = true; // Indicate the interaction is via touch
+  touchStartY.value = event.touches[0].clientY;
+};
+const handleTouchMove = (event: TouchEvent) => {
+  touchEndY.value = event.touches[0].clientY;
+};
+const handleTouchEnd = () => {
+  const swipeDistance = touchStartY.value - touchEndY.value;
+  if (Math.abs(swipeDistance) < 10) {
+    toggleDropdown();
+  }
+  setTimeout(() => (isTouch.value = false), 100);
+};
+const toggleDropdown = () => {
+  if (!props.disabled) {
+    isDropdownOpen.value = !isDropdownOpen.value;
+  }
+};
+//
 
 const closeDropdown = () => {
   isDropdownOpen.value = false;

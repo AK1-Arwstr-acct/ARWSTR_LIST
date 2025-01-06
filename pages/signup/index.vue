@@ -1,5 +1,5 @@
 <template>
-  <div class="h-[100dvh] w-[100dvw] overflow-x-hidden no-scrollbar">
+  <div class="h-[100dvh] w-full overflow-x-hidden no-scrollbar">
     <div class="size-full flex overflow-hidden min-h-fit">
       <!-- Left Side -->
       <div
