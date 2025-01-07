@@ -8,6 +8,7 @@
         <div class="p-6 size-full flex flex-col gap-6 items-center">
           <div class="md:max-w-[856px]">
             <video
+              preload="auto"
               autoplay
               loop
               muted
@@ -23,12 +24,12 @@
             Join the exclusive waitlist to try the AI we cooked for your study
             abroad dream!
           </h1>
-          <button
-            @click="navigateTo('/signup')"
+          <NuxtLink
+            to="/signup"
             class="text-[#F3F3F3] font-semibold bg-[#8380FF] rounded-lg p-3"
           >
             Sign up for waitlist
-          </button>
+          </NuxtLink>
         </div>
       </div>
     </div>
